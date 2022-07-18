@@ -1,0 +1,21 @@
+name: pygbag_build
+on: [workflow_dispatch]
+
+
+jobs:  
+  build-pygbag:
+    name: Build for Emscripten
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Checkout
+      run: |
+            python3 -m pip install pygbag
+            python3 -m pygbag --build --template window-template-wip.tmpl $GITHUB_WORKSPACE/main.py
+
+    - name : "Upload to GitHub pages"
+      uses: JamesIves/github-pages-deploy-action@4.1.7
+      with:
+        branch: gh-pages
+        folder: build/web
