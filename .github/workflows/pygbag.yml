@@ -12,7 +12,7 @@ jobs:
     - name: Checkout
       run: |
             python3 -m pip install git+https://github.com/pmp-p/pygbag-wip
-            python3 -m pygbag --template default.tmpl --cdn https://pmp-p.github.io/pygbag-wip/ --build $GITHUB_WORKSPACE/main.py
+            python3 -m pygbag --cdn https://pmp-p.github.io/pygbag-wip/ --build $GITHUB_WORKSPACE/main.py
 
     - name : "Upload to GitHub pages"
       uses: JamesIves/github-pages-deploy-action@4.1.7
