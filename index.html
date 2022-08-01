@@ -2,7 +2,7 @@
 <html lang="en-us">
 <!--
     Pygbag Version : 0.1.2
-    CDN URL : http://localhost:8000/
+    CDN URL : https://pmp-p.github.io/python-wasm-plus/
 
     Title   : cookiecutter.title
     Folder  : pygame-alien-dimension-wasm
@@ -24,7 +24,7 @@ config = {
     xtermjs : "1" ,
     _sdl2 : "canvas",
     archive : "pygame-alien-dimension-wasm",
-    cdn : "http://localhost:8000/",
+    cdn : "https://pmp-p.github.io/python-wasm-plus/",
     autorun : 0,
     pybuild : "3.11"
 }
@@ -37,10 +37,10 @@ config = {
     <meta name="mobile-web-app-capable" content="yes">
 
     <link rel="icon" type="image/png" href="favicon.png" sizes="16x16">
-    <link rel="stylesheet" href="http://localhost:8000//styles.css"/>
+    <link rel="stylesheet" href="https://pmp-p.github.io/python-wasm-plus//styles.css"/>
 
-    <link rel="stylesheet" href="http://localhost:8000//xtermjsixel/xterm.css" />
-    <link rel="stylesheet" href="http://localhost:8000//xtermjsixel/style.css"/>
+    <link rel="stylesheet" href="https://pmp-p.github.io/python-wasm-plus//xtermjsixel/xterm.css" />
+    <link rel="stylesheet" href="https://pmp-p.github.io/python-wasm-plus//xtermjsixel/style.css"/>
     <style>
         #status {
             display: inline-block;
@@ -98,12 +98,12 @@ config = {
         }
     </style>
 
-    <script src="http://localhost:8000//browserfs.min.js"></script>
-    <script src="http://localhost:8000//xtermjsixel/xterm.js"></script>
-    <script src="http://localhost:8000//xtermjsixel/xterm-addon-image.js"></script>
+    <script src="https://pmp-p.github.io/python-wasm-plus//browserfs.min.js"></script>
+    <script src="https://pmp-p.github.io/python-wasm-plus//xtermjsixel/xterm.js"></script>
+    <script src="https://pmp-p.github.io/python-wasm-plus//xtermjsixel/xterm-addon-image.js"></script>
 
-    <script type=module src="http://localhost:8000//vtx.js"></script>
-    <script type="module" src="http://localhost:8000//pythons.js" async defer></script>
+    <script type=module src="https://pmp-p.github.io/python-wasm-plus//vtx.js"></script>
+    <script type="module" src="https://pmp-p.github.io/python-wasm-plus//pythons.js" async defer></script>
 
 
 </head>
@@ -266,9 +266,9 @@ if os.path.isfile("/data/data/pythonrc.py"):
             runsite = runsite+ `print("_"*80);print("${python.motd}");print("_"*80);`
 
 
-        if (await _rcp("http://localhost:8000//pythonrc.py","/data/data/pythonrc.py")) {
+        if (await _rcp("https://pmp-p.github.io/python-wasm-plus//pythonrc.py","/data/data/pythonrc.py")) {
 
-            await _rcp("http://localhost:8000//custom.py","/data/data/custom.py")
+            await _rcp("https://pmp-p.github.io/python-wasm-plus//custom.py","/data/data/custom.py")
 
 
             if (python.APK != "org.python") {
