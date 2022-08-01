@@ -2,7 +2,7 @@
 <html lang="en-us">
 <!--
     Pygbag Version : 0.1.2
-    CDN URL : https://pmp-p.github.io/pygbag-wip/
+    CDN URL : http://localhost:8000/
 
     Title   : cookiecutter.title
     Folder  : pygame-alien-dimension-wasm
@@ -15,7 +15,21 @@
 
 -->
 
+
+
 <head>
+
+<script type="application/javascript">
+config = {
+    xtermjs : "1" ,
+    _sdl2 : "canvas",
+    archive : "pygame-alien-dimension-wasm",
+    cdn : "http://localhost:8000/",
+    autorun : 0,
+    pybuild : "3.11"
+}
+</script>
+
     <title>cookiecutter.title</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,10 +37,10 @@
     <meta name="mobile-web-app-capable" content="yes">
 
     <link rel="icon" type="image/png" href="favicon.png" sizes="16x16">
-    <link rel="stylesheet" href="https://pmp-p.github.io/pygbag-wip//styles.css"/>
+    <link rel="stylesheet" href="http://localhost:8000//styles.css"/>
 
-    <link rel="stylesheet" href="https://pmp-p.github.io/pygbag-wip//xtermjsixel/xterm.css" />
-    <link rel="stylesheet" href="https://pmp-p.github.io/pygbag-wip//xtermjsixel/style.css"/>
+    <link rel="stylesheet" href="http://localhost:8000//xtermjsixel/xterm.css" />
+    <link rel="stylesheet" href="http://localhost:8000//xtermjsixel/style.css"/>
     <style>
         #status {
             display: inline-block;
@@ -84,11 +98,12 @@
         }
     </style>
 
-    <script src="https://pmp-p.github.io/pygbag-wip//xtermjsixel/xterm.js"></script>
-    <script src="https://pmp-p.github.io/pygbag-wip//xtermjsixel/xterm-addon-image.js"></script>
-    <script src="https://pmp-p.github.io/pygbag-wip//browserfs.min.js"></script>
+    <script src="http://localhost:8000//browserfs.min.js"></script>
+    <script src="http://localhost:8000//xtermjsixel/xterm.js"></script>
+    <script src="http://localhost:8000//xtermjsixel/xterm-addon-image.js"></script>
 
-    <script type="module" src="https://pmp-p.github.io/pygbag-wip//python311.js" async defer></script>
+    <script type=module src="http://localhost:8000//vtx.js"></script>
+    <script type="module" src="http://localhost:8000//pythons.js" async defer></script>
 
 
 </head>
@@ -114,6 +129,12 @@ style="width: 100%; height=100%"
                 <button id="aiopaused_true" disabled>AIO ■</button>
                 <button id="aiopaused_false" disabled>AIO ▶</button>
                 <button id="pygame_mixer_music_pause" disabled>Music ■</button>
+            </div>
+            <div class="button-container">
+                <div id=load_min>min</div>
+                <div id=load_avg>avg</div>
+                <div id=load_max>max</div>
+              <button id="load_rst" disabled>RESET</button>
             </div>
         </div>
 
@@ -148,14 +169,6 @@ width="470px" height="88%"
 
 
     <script type="application/javascript">
-    config = {
-        xtermjs : "1" ,
-        _sdl2 : "canvas",
-        archive : "pygame-alien-dimension-wasm",
-        cdn : "https://pmp-p.github.io/pygbag-wip/",
-        autorun : 0
-    }
-
     function custom_prerun(){
         // no python main and no (MEMFS + VFS) yet.
         console.log(__FILE__, "custom_prerun")
@@ -253,9 +266,9 @@ if os.path.isfile("/data/data/pythonrc.py"):
             runsite = runsite+ `print("_"*80);print("${python.motd}");print("_"*80);`
 
 
-        if (await _rcp("https://pmp-p.github.io/pygbag-wip//pythonrc.py","/data/data/pythonrc.py")) {
+        if (await _rcp("http://localhost:8000//pythonrc.py","/data/data/pythonrc.py")) {
 
-            await _rcp("https://pmp-p.github.io/pygbag-wip//custom.py","/data/data/custom.py")
+            await _rcp("http://localhost:8000//custom.py","/data/data/custom.py")
 
 
             if (python.APK != "org.python") {
@@ -285,6 +298,27 @@ if os.path.isfile("/data/data/pythonrc.py"):
 
 
     window.onload = function () {
+
+        window.tracks = { counter : 0 }
+
+
+        tracks.add = function add(track) {
+            tracks.counter++;
+            const tracknum = tracks.counter
+            const audio = new Audio(track)
+                audio.addEventListener("canplaythrough", (event) => { audio.play() })
+                audio.addEventListener('ended', (event) => {
+                    console.log(tracknum," LOOP? ")
+                    //audio.fastSeek(0)
+                    audio.play()
+                })
+            tracks[tracks.counter] = audio
+            return tracks.counter
+        }
+
+        tracks.stop = function stop(track) {
+            tracks[""+track].pause()
+        }
 
         var wasmterm
         var debug_hidden = true;
@@ -351,7 +385,7 @@ __import__('webbrowser').EventTarget.build('upload', json.dumps(${pydata}))
 
 
 // window resize
-        function window_resize() {
+        function window_canvas_adjust() {
             var want_w
             var want_h
 
@@ -385,9 +419,14 @@ __import__('webbrowser').EventTarget.build('upload', json.dumps(${pydata}))
             console.log("style[NEW]:", canvas.style.width, canvas.style.height)
         }
 
+
+        function window_resize() {
+            setTimeout(window_canvas_adjust, 100);
+            setTimeout(window.focus, 200);
+        }
+
         window.addEventListener('resize', window_resize);
         window.window_resize = window_resize
-
 
 
         if (!config.xtermjs) {
@@ -399,10 +438,11 @@ __import__('webbrowser').EventTarget.build('upload', json.dumps(${pydata}))
 
             window.xterm = wasmterm.xterm
 
-        }
 
+        }
         pythonvm(wasmterm, config)
 
+        window_canvas_adjust();
 
     }
 
