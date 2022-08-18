@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Checkout
       run: |
-            sudo apt-get install -y ffmpeg pngquant
+            #sudo apt-get install -y ffmpeg pngquant
             python3 -m pip install git+https://github.com/pmp-p/pygbag-wip
             python3 -m pygbag --cdn https://pygame-web.github.io/archives/0.1.4/ --build $GITHUB_WORKSPACE/main.py
 
