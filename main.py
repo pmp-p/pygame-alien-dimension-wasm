@@ -7,11 +7,7 @@ from sys import exit as sys_exit
 import pygame
 
 pygame.init()
-
-try:
-    pygame.mixer.SoundPatch()
-except:
-    pass
+pygame.mixer.init()
 
 
 TILE_SIZE = 16
@@ -1093,9 +1089,6 @@ class Portal(pygame.sprite.Sprite):
 
 
 class Base:
-    pygame.mixer.pre_init(44100, -16, 40, 512)
-    pygame.init()
-    pygame.mixer.init()
     Clock = pygame.time.Clock()
     display = state_fullscreen()
     screen = pygame.Surface((300, round(300 / AR)))

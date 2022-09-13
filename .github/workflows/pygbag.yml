@@ -12,8 +12,8 @@ jobs:
     - name: Checkout
       run: |
             #sudo apt-get install -y ffmpeg pngquant
-            python3 -m pip install git+https://github.com/pmp-p/pygbag-wip
-            python3 -m pygbag --cdn https://pygame-web.github.io/archives/0.1.4/ --build $GITHUB_WORKSPACE/main.py
+            python3 -m pip install git+https://github.com/pygame-web/pygbag
+            python3 -m pygbag --build $GITHUB_WORKSPACE
 
     - name : "Upload to GitHub pages"
       uses: JamesIves/github-pages-deploy-action@4.1.7
