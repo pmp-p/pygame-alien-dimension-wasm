@@ -17,7 +17,10 @@ _______CREDITS_________________
 # Music Produced by GaxTar Music.
 
 _______SOCIAL_MEDIA_____________
-#e-mail -> hgquantum24@gmail.com
+Twitter/X -> https://twitter.com/QuantumHg
+Itch.io -> https://quantum-hg.itch.io
+Github -> https://github.com/Quantum-HG
+
 
 
 The copyrights of the Music belongs to GaxTar Music 
